@@ -19,10 +19,11 @@ PKWARE website \cite{zipSpec}.
 
 
 \subsection{COMBINE archive extensions}
+\label{combine-archive-extensions}
 The extension for the COMBINE archive is \token{.omex}, for "{O}pen 
 {M}odeling {EX}change format". If a COMBINE archive with that extension 
 is encountered, an application should present the user with the 
-\textit{active document} \ref{active_document}. 
+\textit{active document} (see also \ref{active_document}). 
 
 
 Additional extensions are being used, so that applications can quickly 
@@ -88,13 +89,14 @@ and \primtype{string}.
 
 
 \newpage
-\subsection{The \class{OmexManifest} class}
+\subsection{The \token{manifest.xml} file and the \class{OmexManifest} class}
 \label{manifest-class}
-The \OmexManifest class represents the root of the COMBINE archive file. 
-It contains a number of \Content children, one of which with the 
-location of \token{manifest.xml} represents the manifest itself. 
 
-Note that a valid manifest needs to have at least one entry, but may 
+At the root of the COMBINE archive stands one file, with the prescribed name \token{manifest.xml}. This file cotnains an instantiation of the \OmexManifest class. 
+
+It contains a number of \Content children, one of which represents the manifest itself. 
+
+Note that a valid manifest needs to have at least one entry, that of the manifest itself, but may 
 contain as many entries as needed. 
 
 \begin{figure}[h!]
@@ -118,8 +120,6 @@ The \token{location} attribute is a required attribute of type
 \token{string}. It represents a relative location to an entry within the 
 archive. The root of the archive is represented by a dot \token{'.'}. 
 
-
-
 \paragraph{The \token{format} attribute}
 The \token{format} is a required attribute of type \token{string}. It 
 indicates the file type of the \Content element. The values of the 
@@ -127,6 +127,21 @@ indicates the file type of the \Content element. The values of the
 denotes one of the COMBINE standards, in which case the \token{format} 
 will begin with its \token{identifiers.org} url. Otherwise the 
 \token{format} will represent a MIME type. 
+
+Using \token{identifiers.org} allows to unambiguously define the COMBINE standard, and even its level and version. For example, the identifier: \token{http://identifiers.org/combine.specifications/sbml} would denote the \Content 
+element as being encoded in the SBML format. That is usually sufficient, as tools supporting one level of SBML usually
+support others as well. However, if the software exporting the COMBINE archive wanted to be more precise, it could specify that it is an SBML Level 2 document with 
+
+\begin{center}
+\token{http://identifiers.org/combine.specifications/sbml.level-2}
+\end{center}
+
+or even declare its Version with 
+
+\begin{center}
+\token{http://identifiers.org/combine.specifications/sbml.level-2.version-3}.
+\end{center}
+
 
 \paragraph{The \token{master} attribute}
 \label{active_document}
@@ -136,8 +151,30 @@ processing the content of an archive. Are top model description in a
 composed model, calling the various submodels; simulation description, 
 calling the different model descriptions and data sources used in the 
 experiment. At most one content element per archive may have its master 
-attribute set to \token{true}. 
+attribute set to \token{true}. For example in the snippet below, it is the 
+SED-ML element with \token{location="./simulation.xml"} that a software 
+program should first present to their users.
 
+\begin{example}
+<?xml version="1.0" encoding="utf-8"?>
+<omexManifest xmlns="http://identifiers.org/combine.specifications/omex-manifest">
+    <content location="./manifest.xml" 
+		         format="http://identifiers.org/combine.specifications/omex-manifest"/>
+    <content location="./model/model.xml" 
+		         format="http://identifiers.org/combine.specifications/sbml"/>
+    <content location="./simulation.xml" master="true"
+		         format="http://identifiers.org/combine.specifications/sedml"/>
+    <content location="./article.pdf" 
+		         format="application/pdf"/>
+    <content location="./metadata.rdf" 
+		         format="http://identifiers.org/combine.specifications/omex-metadata"/>
+</omexManifest>
+\end{example}
+
+To simplify the identification of the active document the file extensions 
+(see also \ref{combine-archive-extensions}) can also be used. For the example above, 
+where a SED-ML document is being marked as the master document, the 
+recommended extension would be \token{.sedx}. 
 
 \subsection{Advised format for the archive metadata}
 
@@ -162,7 +199,7 @@ organisations:
 
 	vCard 4 (\cite{rfc6350}), a file format standard for electronic business 
     cards. (More information on how to use vCard in RDF can be found 
-    here\footnote[1]{\url{http://www.w3.org/TR/vcard-rdf/ }}. 
+    on the W3C website\footnote[1]{\url{http://www.w3.org/TR/vcard-rdf/ }}. 
 
 	}
 	\item {
@@ -175,19 +212,25 @@ organisations:
 		\item \token{description}, 
 		\item \token{creator}, 
 		\item \token{created}, 
-		\item \token{modified} and
+		\item \token{modified}
 		\item \token{W3CDTF}.
 	\end{itemize}
-	
+		
 	More information on the use of Dublin Core in RDF can be found 
-	here{\footnote[3]{\url{http://dublincore.org/documents/dc-rdf/}}} } 
+	on the Dublin Core website{\footnote[3]{\url{http://dublincore.org/documents/dc-rdf/}}} } 
+	
+	The definition of the date format used within \token{dcterms:created} and 
+	\token{dcterms:modified} elements see the note on the W3C Website 
+	{\footnote[4]{\url{http://www.w3.org/TR/NOTE-datetime}}}.
 
 \end{itemize}
-
+\pagebreak
 Users of the COMBINE standards may already be familiar with this 
 approach, as it is also taken by the Systems Biology Markup Language. 
 Note however that the format here slightly differs from the controlled 
-annotations of SBML. The differences are: 
+annotations of SBML. The differences have been made to address inconsistencies 
+in the SBML vCard specification and to follow W3C recommendations. The changes 
+are:
 
 \begin{itemize}
 	\item  "Family" becomes "family-name" 

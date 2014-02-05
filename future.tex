@@ -10,7 +10,10 @@ version of the COMBINE archive specification.
 It was often discussed to also allow the \token{location} elements of a 
 \Content element point to an external document. However, in this first 
 version we restrict them to local files, so as to make it easier to 
-adopt. 
+adopt in software tools. That way tools could focus on the primary use 
+case of bundling up several local resources, rather than worry about 
+retrieving information from online resources that may not always be 
+available or may be more complex.
 
 \subsection{Cross References between entries}
 At HARMONY we spend some time discussing whether cross references 

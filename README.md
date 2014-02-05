@@ -7,6 +7,9 @@ The official home of the COMBINE Archive is on [http://co.mbine.org/documents/ar
 ###Latest Builds
 While not yet authoritative, we keep builds in this repository, to easily share our progress: 
 
+###Discuss the Specification
+This specification ought to be discussed on the COMBINE mailing list under: `combine-discuss@mbine.org`. 
+
 ###Software Support
 Software support for the COMBINE Archive is growing fast, here a selection of tools that we are aware of that use the archive: 
 

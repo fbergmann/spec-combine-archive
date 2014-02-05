@@ -1,0 +1,68 @@
+% -*- TeX-master: "main"; fill-column: 72 -*-
+
+\section{Illustrative examples of the syntax}
+\label{examples}
+
+This section contains a worked example showing the encoding of a model 
+and associated data in a COMBINE archive. First the \OmexManifest, that 
+includes five entries. One of these entries is the \OmexManifest itself, 
+it has a fixed location \token{location="./manifest.xml"}. Additionally 
+the archive includes an SBML model, a SED-ML description. It also 
+includes a PDF file that is specified through its MIME type. Finally 
+associated meta information for clerical data is included in 
+\token{location="./metadata.rdf"}. 
+
+
+\begin{example}
+<?xml version="1.0" encoding="utf-8"?>
+<omexManifest xmlns="http://identifiers.org/combine.specifications/omex-manifest">
+    <content location="./manifest.xml" 
+		         format="http://identifiers.org/combine.specifications/omex-manifest"/>
+    <content location="./model/model.xml" 
+		         format="http://identifiers.org/combine.specifications/sbml"/>
+    <content location="./simulation.xml" 
+		         format="http://identifiers.org/combine.specifications/sedml"/>
+    <content location="./article.pdf" 
+		         format="application/pdf"/>
+    <content location="./metadata.rdf" 
+		         format="http://identifiers.org/combine.specifications/omex-metadata"/>
+</omexManifest>
+\end{example}
+
+Here a complete example, on how the clerical data could be encoded: 
+
+\begin{example}
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+         xmlns:dcterms="http://purl.org/dc/terms/" 
+				 xmlns:vCard="http://www.w3.org/2006/vcard/ns#">
+
+   <rdf:Description rdf:about="./simulation.xml">
+      <dcterms:description>SED-ML Description Representing a 1D Steady Scan 
+			   experiment carried out on the Heinrich Oscillator model. 
+			</dcterms:description>
+      <dcterms:creator>
+         <rdf:Bag>
+            <rdf:li rdf:parseType="Resource">
+               <vCard:n rdf:parseType="Resource">
+                  <vCard:family-name>Bergmann</vCard:family-name>
+                  <vCard:given-name>Frank</vCard:given-name>
+               </vCard:n>
+               <vCard:email>fbergman@caltech.edu</vCard:email>
+               <vCard:org rdf:parseType="Resource">
+                  <vCard:organization-name>
+									  California Institute of Technology
+									</vCard:organization-name>
+               </vCard:org>
+            </rdf:li>
+         </rdf:Bag>
+      </dcterms:creator>
+      <dcterms:created rdf:parseType="Resource">
+         <dcterms:W3CDTF>2014-01-20T19:52:11Z</dcterms:W3CDTF>
+      </dcterms:created>
+      <dcterms:modified rdf:parseType="Resource">
+         <dcterms:W3CDTF>2014-01-20T19:54:05Z</dcterms:W3CDTF>
+      </dcterms:modified>
+   </rdf:Description>
+</rdf:RDF>
+\end{example}

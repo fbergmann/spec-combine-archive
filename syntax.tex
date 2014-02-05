@@ -1,0 +1,221 @@
+% -*- TeX-master: "main"; fill-column: 72 -*-
+
+\section{Proposed syntax and semantics}
+\label{syntax}
+
+In this section, we define the syntax and semantics of the COMBINE 
+Archive. We expound on the various data types and constructs defined, 
+then in \sect{examples}, we provide complete examples of using the 
+constructs in an example archive. 
+
+
+
+\subsection{The archive format}
+The COMBINE archive is a "zip" file \cite{zipFile}. Zip is a file format 
+used for data compression and archiving. A zip file contains one or more 
+files that have been compressed, to reduce file size, or stored as is. 
+The technical specification of the ZIP format is available from the 
+PKWARE website \cite{zipSpec}. 
+
+
+\subsection{COMBINE archive extensions}
+The extension for the COMBINE archive is \token{.omex}, for "{O}pen 
+{M}odeling {EX}change format". If a COMBINE archive with that extension 
+is encountered, an application should present the user with the 
+\textit{active document} \ref{active_document}. 
+
+
+Additional extensions are being used, so that applications can quickly 
+open a specific file from the COMBINE archive. This provides users with 
+a consistent behavior in that each time such a file is opened, the 
+corresponding same main file opens. The extensions in use are: 
+
+
+\begin{itemize}
+	\item {\token{.sedx} - SED-ML archive}
+	\item {\token{.sbex} - SBML archive}
+	\item {\token{.cmex} - CellML archive}
+	\item {\token{.neux} - NeuroML archive}
+	\item {\token{.phex} - PharmML archive}
+\end{itemize}
+
+
+\subsection{Content of the archive}
+
+The archive contains: 
+
+\begin{enumerate}
+	\item {
+	
+     a manifest file, called \token{manifest.xml}, always located at the 
+     root of the archive, that describes the location and the type of each 
+     data file contained in the archive (including itself). 
+     
+     The location of those files is defined by a relative URI. In the current 
+     version of the COMBINE archive, all the files described must be included 
+     in the archive itself. It is envisioned that in the future the manifest 
+     could list files located elsewhere, using valid and resolvable http 
+     URIs. 
+
+	}
+	\item {
+     a metadata file, called \token{metadata.*} (where \token{*} means the 
+     suitable file extension) containing clerical information about the 
+     various files contained in the archive, and the archive itself. 
+	}
+	\item {all the remaining files necessary to the model and simulation project. }
+
+\end{enumerate}
+
+\subsection{Namespace URI and other declarations necessary}
+\label{xml-namespace}
+
+The COMBINE archive defines a namespace URI that allow to uniquely 
+identify, the manifest. The following is the namespace URI for this 
+version of the COMBINE archive manifest: 
+
+
+\begin{center}
+\uri{http://identifiers.org/combine.specifications/omex-manifest}
+\end{center}
+
+\subsection{Primitive data types}
+\label{primtypes}
+
+The COMBINE archive uses the XML Schema 1.0 data types~\citep{biron:2000}.
+More specifically we make use of \primtype{integer}, \primtype{double},
+and \primtype{string}.
+
+
+\newpage
+\subsection{The \class{OmexManifest} class}
+\label{manifest-class}
+The \OmexManifest class represents the root of the COMBINE archive file. 
+It contains a number of \Content children, one of which with the 
+location of \token{manifest.xml} represents the manifest itself. 
+
+Note that a valid manifest needs to have at least one entry, but may 
+contain as many entries as needed. 
+
+\begin{figure}[h!]
+  \centering
+  % Requires \usepackage{graphicx}
+  \includegraphics[width=6cm]{images/OmexManifest.pdf}\\
+  \caption{A UML representation of the Manifest. Each manifest contains a number
+	of Content elements.}
+  \label{fig:combine_uml}
+\end{figure}
+
+\subsection{The \class{Content} class}
+\label{content-class}
+The \Content class represents an entry in the \OmexManifest and by 
+extension a file in the \textit{COMBINE archive}. It consists of two 
+required attributes: \token{location} and \token{format} and the 
+optional attribute \token{master} 
+
+\paragraph{The \token{location} attribute}
+The \token{location} attribute is a required attribute of type 
+\token{string}. It represents a relative location to an entry within the 
+archive. The root of the archive is represented by a dot \token{'.'}. 
+
+
+
+\paragraph{The \token{format} attribute}
+The \token{format} is a required attribute of type \token{string}. It 
+indicates the file type of the \Content element. The values of the 
+\token{format} attribute fall in two categories. Either the format 
+denotes one of the COMBINE standards, in which case the \token{format} 
+will begin with its \token{identifiers.org} url. Otherwise the 
+\token{format} will represent a MIME type. 
+
+\paragraph{The \token{master} attribute}
+\label{active_document}
+The \token{master} is an optional attribute of type \token{boolean}. It 
+represents a hint, that a certain file is to be used first when 
+processing the content of an archive. Are top model description in a 
+composed model, calling the various submodels; simulation description, 
+calling the different model descriptions and data sources used in the 
+experiment. At most one content element per archive may have its master 
+attribute set to \token{true}. 
+
+
+\subsection{Advised format for the archive metadata}
+
+One can include any type of file in a COMBINE archive, and therefore any 
+type of metadata format. However, in the interest of interoperability, 
+and to ease the development of software support for metadata, a 
+recommended format is provided as part of the specification of the 
+archive. 
+
+The recommended format is based on several standards developed by other 
+organisations: 
+
+\begin{itemize}
+	\item  {
+	
+     The \href{http://www.w3.org/RDF/ }{ Resource Description Format} of the 
+     W3C, in particular its \token{RDF}, \token{Description}, \token{Bag} and 
+     \token{li} elements. 
+
+	}
+	\item  {
+
+	vCard 4 (\cite{rfc6350}), a file format standard for electronic business 
+    cards. (More information on how to use vCard in RDF can be found 
+    here\footnote[1]{\url{http://www.w3.org/TR/vcard-rdf/ }}. 
+
+	}
+	\item {
+	
+	Metadata 
+	Terms\footnote[2]{\url{http://dublincore.org/documents/dcmi-terms/}} of 
+	the Dublin Core Metadata Initiative, in particular the terms: 
+
+	\begin{itemize}
+		\item \token{description}, 
+		\item \token{creator}, 
+		\item \token{created}, 
+		\item \token{modified} and
+		\item \token{W3CDTF}.
+	\end{itemize}
+	
+	More information on the use of Dublin Core in RDF can be found 
+	here{\footnote[3]{\url{http://dublincore.org/documents/dc-rdf/}}} } 
+
+\end{itemize}
+
+Users of the COMBINE standards may already be familiar with this 
+approach, as it is also taken by the Systems Biology Markup Language. 
+Note however that the format here slightly differs from the controlled 
+annotations of SBML. The differences are: 
+
+\begin{itemize}
+	\item  "Family" becomes "family-name" 
+	\item  "Given" becomes "given-name" 
+	\item  "EMAIL" becomes "email" 
+	\item  "Orgname" becomes "organization-name" 
+\end{itemize}
+
+A \textit{COMBINE archive} can include multiple metadata elements. To 
+identify that a particular \Content element is being annotated, the 
+\token{rdf:about} attribute should use the same value that is also used 
+in \token{location} of the \Content element. 
+
+
+\begin{example}
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+         xmlns:dcterms="http://purl.org/dc/terms/" 
+				 xmlns:vCard="http://www.w3.org/2006/vcard/ns#">
+   <rdf:Description rdf:about="./simulation.xml">
+   ...
+	 </rdf:Description>
+</rdf:RDF>
+\end{example}
+
+The example above signifies that a content element with 
+\token{location="./simulation.xml"} is described. A complete example of 
+the metadata related to a simulation description contained in a COMBINE 
+archive is described in \ref{examples}. 
+
+

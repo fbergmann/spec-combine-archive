@@ -1,0 +1,35 @@
+% -*- TeX-master: "main"; fill-column: 72 -*-
+
+\section{Background}
+\label{background}
+
+\subsection{Past work on this problem or similar topics}
+The COMBINE Archive has been formed out of the SED-ML Archive, that was 
+first introduced in the SED-ML mailing list in 2009, and briefly described
+in SED-ML Level~1 Version~1 \cite{sedmll1v1}. The SED-ML Archive, addressed the need of 
+prividing a way to include all relevant models used in a SED-ML simulation
+experiment along with the experiment specification. The SED-ML archive is 
+basically the convention to provide inside a ZIP file (with extension .sedx)
+a SED-ML document with the same base name as the extension. That was sufficient 
+for SED-ML. 
+
+The COMBINE Archive extends this approach by a metafile, that allows to include 
+provenance information with the archive, and a specification of the content types
+of files included in the COMBINE Archive (the manifest). 
+
+This approach also makes it easy to extend approaches using a distributed version 
+control system (like PMR2) to export COMBINE archives, by generating a manifest file
+during export. 
+
+This specification has been created out of the many discussions that took place
+on the combine-discuss mailing list. The primary threads are located here: 
+
+\begin{itemize}
+	\item \href{http://listserver.ebi.ac.uk/pipermail/combine-discuss/2011-October/thread.html}{http://listserver.ebi.ac.uk/pipermail/combine-discuss/2011-October/thread.html}
+	\item \href{http://listserver.ebi.ac.uk/pipermail/combine-discuss/2011-November/000016.html}{http://listserver.ebi.ac.uk/pipermail/combine-discuss/2011-November/000016.html}
+	\item \href{http://listserver.ebi.ac.uk/pipermail/combine-discuss/2012-January/thread.html}{http://listserver.ebi.ac.uk/pipermail/combine-discuss/2012-January/thread.html}
+\end{itemize}
+
+The discussion continued at the last Hackathons, HARMONY 2012 where
+for the first time a larger audience discussed a \href{https://docs.google.com/document/d/10tI1NwehBVDTxE5Q11APx7bZVoeNVJdFMiBdPywZKZM/edit}{preliminary proposal} put together by Richard Adams, Frank T. Bergmann and Nicolas Le Nov\`{e}re.  
+Further discussions were held at \href{https://docs.google.com/document/d/1ji2mOiWzXXl9ON6sU6Svd3E_IufowUCz24hklqci0iM/edit}{HARMONY\_2013}. 

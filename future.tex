@@ -1,0 +1,31 @@
+% -*- TeX-master: "main"; fill-column: 72 -*-
+
+\section{Future development}
+\label{future}
+In this section we highlight some open issues not addressed in this 
+version of the COMBINE archive specification. 
+
+
+\subsection{Linking to external documents}
+It was often discussed to also allow the \token{location} elements of a 
+\Content element point to an external document. However, in this first 
+version we restrict them to local files, so as to make it easier to 
+adopt. 
+
+\subsection{Cross References between entries}
+At HARMONY we spend some time discussing whether cross references 
+between the individual entries in the archive ought to be in this first 
+version of the specification. However, it was decided to leave the cross 
+referencing to the individual standards for now, rather to impose them 
+ad-hoc. 
+
+\subsection{Alternative versions of the archive metadata}
+It was suggested to allow different versions of the archive metadata 
+format. The manifest already provides a way for referencing alternate 
+versions, all that would need to be changed, would be the format 
+identifier to point to a different specification rather than: 
+
+
+\url{http://identifiers.org/combine.specifications/omex-metadata}
+
+However, as of the time of this writing no such format was proposed.

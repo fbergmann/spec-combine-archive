@@ -44,16 +44,14 @@ Here a complete example, on how the clerical data could be encoded:
       <dcterms:creator>
          <rdf:Bag>
             <rdf:li rdf:parseType="Resource">
-               <vCard:n rdf:parseType="Resource">
+               <vCard:hasName rdf:parseType="Resource">
                   <vCard:family-name>Bergmann</vCard:family-name>
                   <vCard:given-name>Frank</vCard:given-name>
-               </vCard:n>
-               <vCard:email>fbergman@caltech.edu</vCard:email>
-               <vCard:org rdf:parseType="Resource">
-                  <vCard:organization-name>
-									  California Institute of Technology
-									</vCard:organization-name>
-               </vCard:org>
+               </vCard:hasName>
+               <vCard:hasEmail rdf:resource="fbergman@caltech.edu">
+               <vCard:organization-name>
+		      California Institute of Technology
+	       </vCard:organization-name>
             </rdf:li>
          </rdf:Bag>
       </dcterms:creator>

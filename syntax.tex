@@ -92,7 +92,7 @@ and \primtype{string}.
 \subsection{The \token{manifest.xml} file and the \class{OmexManifest} class}
 \label{manifest-class}
 
-At the root of the COMBINE archive stands one file, with the prescribed name \token{manifest.xml}. This file cotnains an instantiation of the \OmexManifest class. 
+At the root of the COMBINE archive stands one file, with the prescribed name \token{manifest.xml}. This file contains an instantiation of the \OmexManifest class. 
 
 It contains a number of \Content children, one of which represents the manifest itself. 
 
@@ -191,37 +191,48 @@ organisations:
 	\item  {
 	
      The \href{http://www.w3.org/RDF/ }{ Resource Description Format} of the 
-     W3C, in particular its \token{RDF}, \token{Description}, \token{Bag} and 
-     \token{li} elements. 
-
+     W3C, in particular its terms:
+     \begin{itemize}
+		\item \token{RDF}, 
+		\item \token{Description}, 
+		\item \token{Bag}, 
+		\item \token{li}.
+	\end{itemize}
 	}
 	\item  {
 
 	vCard 4 (\cite{rfc6350}), a file format standard for electronic business 
-    cards. (More information on how to use vCard in RDF can be found 
-    on the W3C website\footnote[1]{\url{http://www.w3.org/TR/vcard-rdf/ }}. 
+    cards, in particular its terms:
+    	\begin{itemize}
+		\item \token{hasName}, 
+		\item \token{family-name}, 
+		\item \token{given-name}, 
+		\item \token{hasEmail},
+		\item \token{organization-name}.
+	\end{itemize}
 
+	More information on how to use vCard in RDF can be found 
+    on the W3C website\footnote[1]{\url{http://www.w3.org/TR/vcard-rdf/ }}.
+	
 	}
 	\item {
 	
-	Metadata 
-	Terms\footnote[2]{\url{http://dublincore.org/documents/dcmi-terms/}} of 
+	Metadata terms\footnote[2]{\url{http://dublincore.org/documents/dcmi-terms/}} of 
 	the Dublin Core Metadata Initiative, in particular the terms: 
 
 	\begin{itemize}
 		\item \token{description}, 
 		\item \token{creator}, 
 		\item \token{created}, 
-		\item \token{modified}
+		\item \token{modified},
 		\item \token{W3CDTF}.
 	\end{itemize}
 		
 	More information on the use of Dublin Core in RDF can be found 
-	on the Dublin Core website{\footnote[3]{\url{http://dublincore.org/documents/dc-rdf/}}} } 
+	on the Dublin Core website{\footnote[3]{\url{http://dublincore.org/documents/dc-rdf/}}}. } 
 	
-	The definition of the date format used within \token{dcterms:created} and 
-	\token{dcterms:modified} elements see the note on the W3C Website 
-	{\footnote[4]{\url{http://www.w3.org/TR/NOTE-datetime}}}.
+	More information is available about the definition of the date format used within \token{dcterms:created} and 
+	\token{dcterms:modified} elements{\footnote[4]{\url{http://www.w3.org/TR/NOTE-datetime}}}.
 
 \end{itemize}
 \pagebreak
@@ -229,13 +240,14 @@ Users of the COMBINE standards may already be familiar with this
 approach, as it is also taken by the Systems Biology Markup Language. 
 Note however that the format here slightly differs from the controlled 
 annotations of SBML. The differences have been made to address inconsistencies 
-in the SBML vCard specification and to follow W3C recommendations. The changes 
+in the SBML vCard specification and to follow W3C recommendations {\footnote[4]{\url{http://www.w3.org/TR/vcard-rdf/}}} . The changes 
 are:
 
 \begin{itemize}
+	\item  "n" becomes "hasName" 
 	\item  "Family" becomes "family-name" 
 	\item  "Given" becomes "given-name" 
-	\item  "EMAIL" becomes "email" 
+	\item  "EMAIL" becomes "hasEmail" 
 	\item  "Orgname" becomes "organization-name" 
 \end{itemize}
 

@@ -10,7 +10,7 @@ While not yet authoritative, we keep builds in this repository, to easily share 
   - [Latest Build](https://github.com/fbergmann/spec-combine-archive/blob/master/combine_archive_master.pdf) (Work in progress) 
 
 ###Discuss the Specification
-This specification ought to be discussed on the COMBINE mailing list under: `combine-discuss@mbine.org`. 
+This specification ought to be discussed on the COMBINE archive mailing list under: `combine-archive@googlegroups.com`. 
 
 ###Software Support
 Software support for the COMBINE Archive is growing fast, here a selection of tools that we are aware of that use the archive: 

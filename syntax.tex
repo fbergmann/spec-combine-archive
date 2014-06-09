@@ -48,9 +48,10 @@ The archive contains:
 \begin{enumerate}
 	\item {
 	
-     a manifest file, called \token{manifest.xml}, always located at the 
+     a mandatory manifest file, called \token{manifest.xml}, always located at the 
      root of the archive, that describes the location and the type of each 
-     data file contained in the archive (including itself). 
+     data files contained in the archive (including a special entry that represent
+     the whole archive).
      
      The location of those files is defined by a relative URI. In the current 
      version of the COMBINE archive, all the files described must be included 
@@ -71,14 +72,22 @@ The archive contains:
 \subsection{Namespace URI and other declarations necessary}
 \label{xml-namespace}
 
-The COMBINE archive defines a namespace URI that allows to uniquely 
-identify the manifest. The following is the namespace URI for this 
-version of the COMBINE archive manifest: 
+The COMBINE archive defines two namespace URIs that allows to uniquely 
+identify the manifest file and the whole archive.
 
+The namespace URI for this version of the COMBINE archive manifest is the following: 
 
 \begin{center}
 \uri{http://identifiers.org/combine.specifications/omex-manifest}
 \end{center}
+
+The namespace URI for this version of the COMBINE archive is the following: 
+
+\begin{center}
+\uri{http://identifiers.org/combine.specifications/omex}
+\end{center}
+
+
 
 \subsection{Primitive data types}
 \label{primtypes}
@@ -93,10 +102,11 @@ and \primtype{string}.
 
 At the root of the COMBINE archive stands one file, with the prescribed name \token{manifest.xml}. This file contains an instantiation of the \OmexManifest class. 
 
-It contains a number of \Content children, one of which represents the manifest itself. 
+It contains a number of \Content children, one of which represents the COMBINE archive itself. 
 
-Note that a valid manifest needs to have at least one entry, that of the manifest itself, but may 
-contain as many entries as needed. 
+Note that a valid manifest needs to have at least one entry, that of the whole archive, but may 
+contain as many entries as needed. All the files in the archive should be listed in the manifest, the only
+entry that is optionnal is the entry for the manifest.xml file as you are already reading its content.
 
 \begin{figure}[h!]
   \centering
@@ -117,7 +127,7 @@ optional attribute \token{master}
 \paragraph{The \token{location} attribute}
 The \token{location} attribute is a required attribute of type 
 \token{string}. It represents a relative location to an entry within the 
-archive. The root of the archive is represented by a dot \token{'.'}. 
+archive. The archive is represented by a dot \token{'.'}. 
 
 \paragraph{The \token{format} attribute}
 The \token{format} is a required attribute of type \token{string}. It 
@@ -151,17 +161,19 @@ composed model, calling the various submodels; simulation description,
 calling the different model descriptions and data sources used in the 
 experiment. At most one content element per archive may have its master 
 attribute set to \token{true}. For example in the snippet below, it is the 
-SED-ML element with \token{location="./simulation.xml"} that a software 
+SED-ML element with \token{location="simulation.xml"} that a software 
 program should first present to their users.
 
 \begin{example}
 <?xml version="1.0" encoding="utf-8"?>
 <omexManifest xmlns="http://identifiers.org/combine.specifications/omex-manifest">
-    <content location="./manifest.xml" 
+    <content location="." 
+		         format="http://identifiers.org/combine.specifications/omex"/>
+    <content location="manifest.xml" 
 		         format="http://identifiers.org/combine.specifications/omex-manifest"/>
-    <content location="./model/model.xml" 
+    <content location="model/model.xml" 
 		         format="http://identifiers.org/combine.specifications/sbml"/>
-    <content location="./simulation.xml" master="true"
+    <content location="simulation.xml" master="true"
 		         format="http://identifiers.org/combine.specifications/sedml"/>
     <content location="./article.pdf" 
 		         format="application/pdf"/>

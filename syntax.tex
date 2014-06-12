@@ -131,13 +131,14 @@ archive. The archive is represented by a dot \token{'.'}.
 
 \paragraph{The \token{format} attribute}
 The \token{format} is a required attribute of type \token{string}. It 
-indicates the file type of the \Content element. The values of the 
+indicates the file type of the \Content element. The allowed values of the 
 \token{format} attribute fall in two categories. Either the format 
 denotes one of the COMBINE standards, in which case the \token{format} 
-will begin with its \token{identifiers.org} url. Otherwise the 
-\token{format} will represent a MIME type. 
+will begin with its \token{identifiers.org} URI. Or the 
+\token{format} will represent a MIME type, in which case the \token{format} 
+will begin with its \token{purl.org} URI. 
 
-Using \token{identifiers.org} allows to unambiguously define the COMBINE standard, and even its level and version. For example, the identifier: \token{http://identifiers.org/combine.specifications/sbml} would denote the \Content 
+Using \token{identifiers.org} URI allows to unambiguously define the COMBINE standard, and even its level and version. For example, the identifier: \token{http://identifiers.org/combine.specifications/sbml} would denote the \Content 
 element as being encoded in the SBML format. That is usually sufficient, as tools supporting one level of SBML usually
 support others as well. However, if the software exporting the COMBINE archive wanted to be more precise, it could specify that it is an SBML Level 2 document with 
 
@@ -151,6 +152,22 @@ or even declare its Version with
 \token{http://identifiers.org/combine.specifications/sbml.level-2.version-3}.
 \end{center}
 
+The MIME type \token{purl.org} URI would be of the form \token{http://purl.org/NET/mediatypes/}
+followed by the MIME type. Here are a few examples :
+
+\begin{center}
+\token{http://purl.org/NET/mediatypes/image/png}\\
+\token{http://purl.org/NET/mediatypes/application/pdf}\\
+\token{http://purl.org/NET/mediatypes/application/sbml+xml}\\
+\end{center}
+
+If both an \token{identifiers.org} URI and a MIME type are available for one specific format, you should use the
+\token{identifiers.org} URI. 
+
+For compatibility reason, when reading a manifest.xml, you should be able to read format
+attribute that contain only the MIME type, not in it's URI form. That is due to the fact that the draft specification
+was allowing to use directly the MIME type for some time and some COMBINE archive using this form could be encountered.
+However, when creating a new COMBINE archive, the URI form should always be used for MIME type.
 
 \paragraph{The \token{master} attribute}
 \label{active_document}

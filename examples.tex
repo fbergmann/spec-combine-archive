@@ -6,11 +6,11 @@
 This section contains a worked example showing the encoding of a model 
 and associated data in a COMBINE archive. First the \OmexManifest, that 
 includes five entries. One of these entries is the \OmexManifest itself, 
-it has a fixed location \token{location="./manifest.xml"}. Additionally 
+it has a fixed location \token{location="manifest.xml"}. Additionally 
 the archive includes an SBML model, a SED-ML description. It also 
 includes a PDF file that is specified through its MIME type. Finally 
 associated meta information for clerical data is included in 
-\token{location="./metadata.rdf"}. 
+\token{location="metadata.rdf"}. 
 
 
 \begin{example}
@@ -18,15 +18,15 @@ associated meta information for clerical data is included in
 <omexManifest xmlns="http://identifiers.org/combine.specifications/omex-manifest">
     <content location="." 
 		         format="http://identifiers.org/combine.specifications/omex"/>
-    <content location="./manifest.xml" 
+    <content location="manifest.xml" 
 		         format="http://identifiers.org/combine.specifications/omex-manifest"/>
-    <content location="./model/model.xml" 
+    <content location="model/model.xml" 
 		         format="http://identifiers.org/combine.specifications/sbml"/>
-    <content location="./simulation.xml" 
+    <content location="simulation.xml" 
 		         format="http://identifiers.org/combine.specifications/sedml"/>
-    <content location="./article.pdf" 
+    <content location="article.pdf" 
 		         format="http://purl.org/NET/mediatypes/application/pdf"/>
-    <content location="./metadata.rdf" 
+    <content location="metadata.rdf" 
 		         format="http://identifiers.org/combine.specifications/omex-metadata"/>
 </omexManifest>
 \end{example}

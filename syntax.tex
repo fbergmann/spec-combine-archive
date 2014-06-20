@@ -222,7 +222,7 @@ extension. But in other cases, like the example below, the \token{master} attrib
     <content location="." format="http://identifiers.org/combine.specifications/omex"/>
     <content location="manifest.xml" 
         format="http://identifiers.org/combine.specifications/omex-manifest"/>
-    <content location="main-model.xml" master=true 
+    <content location="main-model.xml" master="true"
         format="http://identifiers.org/combine.specifications/cellml.1.1"/>
     <content location="submodel1.xml" 
         format="http://identifiers.org/combine.specifications/cellml.1.1"/>
@@ -237,6 +237,8 @@ extension. But in other cases, like the example below, the \token{master} attrib
 The archive, described by this manifest.xml, contain a modular CellML model. Even if the extension of the archive is \token{cmex}, it
 does not help knowing which file to open first since there are several CellML files. The \token{master} attribute allow the software
 to know which file encode the whole model.
+
+Most archives will concern only one model and should have only one \token{master} attribute set to \token{true}. Although in some cases, the creator of the archive might want to set several \token{master} attribute to \token{true}, may be to indicate alternative renditions of a model if they have different \token{format}, may be to indicate different models that are part of the same experiment or publication. Then the reading software are free to open a given one, all of them or display a dialog box to the user so that he can chose the one(s) he want to open. This might create some confusion as opening the same archive several times in the same software might result in a different model loaded. One option, for those more complex archives, would be to not have any \token{master} attribute set to \token{true} but it might be difficult when an archive contain many files, in particular modular models.
 
 
 \subsection{Advised format for the archive metadata}
@@ -298,7 +300,7 @@ organisations:
 	\token{dcterms:modified} elements{\footnote[4]{\url{http://www.w3.org/TR/NOTE-datetime}}}.
 
 \end{itemize}
-\pagebreak
+
 Users of the COMBINE standards may already be familiar with this 
 approach, as it is also taken by the Systems Biology Markup Language. 
 Note however that the format here slightly differs from the controlled 

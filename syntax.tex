@@ -53,7 +53,7 @@ The archive contains:
      data files contained in the archive (including a special entry that represent
      the whole archive).
      
-     The location of those files is defined by a relative URI. In the current 
+     The location of those files is defined by a relative path. In the current 
      version of the COMBINE archive, all the files described must be included 
      in the archive itself. It is envisioned that in the future the manifest 
      could list files located elsewhere, using valid and resolvable http 
@@ -130,7 +130,7 @@ The \token{location} attribute is a required attribute of type
 archive. The archive is represented by a dot \token{'.'}. 
 
 \paragraph{The \token{format} attribute}
-The \token{format} is a required attribute of type \token{string}. It 
+The \token{format} attribute is a required attribute of type \token{string}. It 
 indicates the file type of the \Content element. The allowed values of the 
 \token{format} attribute fall in two categories. Either the format 
 denotes one of the COMBINE standards, in which case the \token{format} 
@@ -155,11 +155,11 @@ or even declare its Version with
 The MIME type \token{purl.org} URI would be of the form \token{http://purl.org/NET/mediatypes/}
 followed by the MIME type. Here are a few examples :
 
-\begin{center}
-\token{http://purl.org/NET/mediatypes/image/png}\\
-\token{http://purl.org/NET/mediatypes/application/pdf}\\
-\token{http://purl.org/NET/mediatypes/application/sbml+xml}\\
-\end{center}
+\begin{example}
+    http://purl.org/NET/mediatypes/image/png
+    http://purl.org/NET/mediatypes/application/pdf
+    http://purl.org/NET/mediatypes/application/sbml+xml
+\end{example}
 
 If both an \token{identifiers.org} URI and a MIME type are available for one specific format, you should use the
 \token{identifiers.org} URI. 
@@ -171,38 +171,75 @@ However, when creating a new COMBINE archive, the URI form should always be used
 
 \paragraph{The \token{master} attribute}
 \label{active_document}
-The \token{master} is an optional attribute of type \token{boolean}. It 
+The \token{master} attribute is an optional attribute of type \token{boolean}. It 
 represents a hint, that a certain file is to be used first when 
 processing the content of an archive. Are top model description in a 
 composed model, calling the various submodels; simulation description, 
 calling the different model descriptions and data sources used in the 
-experiment. At most one content element per archive may have its master 
-attribute set to \token{true}. For example in the snippet below, it is the 
+experiment. In most cases, one content element per archive will have its \token{master} 
+attribute set to \token{true}.
+
+For example in the snippet below, it is the 
 SED-ML element with \token{location="simulation.xml"} that a software 
 program should first present to their users.
 
 \begin{example}
 <?xml version="1.0" encoding="utf-8"?>
 <omexManifest xmlns="http://identifiers.org/combine.specifications/omex-manifest">
-    <content location="." 
-		         format="http://identifiers.org/combine.specifications/omex"/>
+    <content location="." format="http://identifiers.org/combine.specifications/omex"/>
     <content location="manifest.xml" 
-		         format="http://identifiers.org/combine.specifications/omex-manifest"/>
-    <content location="model/model.xml" 
-		         format="http://identifiers.org/combine.specifications/sbml"/>
+        format="http://identifiers.org/combine.specifications/omex-manifest"/>
+    <content location="model/model.xml" format="http://identifiers.org/combine.specifications/sbml"/>
     <content location="simulation.xml" master="true"
-		         format="http://identifiers.org/combine.specifications/sedml"/>
-    <content location="./article.pdf" 
-		         format="http://purl.org/NET/mediatypes/application/pdf"/>
-    <content location="./metadata.rdf" 
-		         format="http://identifiers.org/combine.specifications/omex-metadata"/>
+        format="http://identifiers.org/combine.specifications/sedml"/>
+    <content location="./article.pdf" format="http://purl.org/NET/mediatypes/application/pdf"/>
+    <content location="./metadata.rdf"
+        format="http://identifiers.org/combine.specifications/omex-metadata"/>
+    <content location="diagram.sbgn" format="http://identifiers.org/combine.specifications/sbgn"/>
 </omexManifest>
 \end{example}
 
-To simplify the identification of the active document the file extensions 
+To simplify the identification, by a user or software, of the active document inside an archive, the file extensions 
 (see also \ref{combine-archive-extensions}) can also be used. For the example above, 
 where a SED-ML document is being marked as the master document, the 
-recommended extension would be \token{.sedx}. 
+recommended extension would be \token{.sbex}, to indicate that the software reading the archive need
+to support the \token{SBML} format to be able to interpret the content of the archive. If the software
+does support SED-ML as well as SBML, it should load the SED-ML file as the creator of the archive indicated
+it to be the '\token{master}' file. If the software doesn't support SED-ML, it can still open the SBML document, ignoring
+the master attribute.
+
+Alternatively, if a software doesn't support either SBML or SED-ML but can open one of the other files, like the pdf
+or diagram describing the model, it can choose to disregard the \token{master} attribute and the archive extension to present to the user the
+files that it support.
+
+In some cases, the \token{master} attribute could appear to be a duplication of the information given by the archive file
+extension. But in other cases, like the example below, the \token{master} attribute add some usefull information.
+
+
+\begin{example}
+<?xml version="1.0" encoding="utf-8"?>
+<omexManifest xmlns="http://identifiers.org/combine.specifications/omex-manifest">
+    <content location="." format="http://identifiers.org/combine.specifications/omex"/>
+    <content location="manifest.xml" 
+        format="http://identifiers.org/combine.specifications/omex-manifest"/>
+    <content location="main-model.xml" master="true"
+        format="http://identifiers.org/combine.specifications/cellml.1.1"/>
+    <content location="submodel1.xml" 
+        format="http://identifiers.org/combine.specifications/cellml.1.1"/>
+    <content location="submodel2.xml" 
+        format="http://identifiers.org/combine.specifications/cellml.1.1"/>
+    <content location="article.pdf" format="http://purl.org/NET/mediatypes/application/pdf"/>
+    <content location="metadata.rdf"
+        format="http://identifiers.org/combine.specifications/omex-metadata"/>
+</omexManifest>
+\end{example}
+
+The archive, described by this manifest.xml, contain a modular CellML model. Even if the extension of the archive is \token{cmex}, it
+does not help knowing which file to open first since there are several CellML files. The \token{master} attribute allow the software
+to know which file encode the whole model.
+
+Most archives will concern only one model and should have only one \token{master} attribute set to \token{true}. Although in some cases, the creator of the archive might want to set several \token{master} attribute to \token{true}, may be to indicate alternative renditions of a model if they have different \token{format}, may be to indicate different models that are part of the same experiment or publication. Then the reading software are free to open a given one, all of them or display a dialog box to the user so that he can chose the one(s) he want to open. This might create some confusion as opening the same archive several times in the same software might result in a different model loaded. One option, for those more complex archives, would be to not have any \token{master} attribute set to \token{true} but it might be difficult when an archive contain many files, in particular modular models.
+
 
 \subsection{Advised format for the archive metadata}
 
@@ -263,7 +300,7 @@ organisations:
 	\token{dcterms:modified} elements{\footnote[4]{\url{http://www.w3.org/TR/NOTE-datetime}}}.
 
 \end{itemize}
-\pagebreak
+
 Users of the COMBINE standards may already be familiar with this 
 approach, as it is also taken by the Systems Biology Markup Language. 
 Note however that the format here slightly differs from the controlled 

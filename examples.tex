@@ -8,7 +8,7 @@ and associated data in a COMBINE archive. First the \OmexManifest, that
 includes five entries. One of these entries is the \OmexManifest itself, 
 it has a fixed location \token{location="manifest.xml"}. Additionally 
 the archive includes an SBML model, a SED-ML description. It also 
-includes a PDF file that is specified through its MIME type. Finally 
+includes a PDF file which format is specified through its Media type. Finally 
 associated meta information for clerical data is included in 
 \token{location="metadata.rdf"}. 
 
@@ -23,7 +23,7 @@ associated meta information for clerical data is included in
     <content location="model/model.xml" 
 		         format="http://identifiers.org/combine.specifications/sbml"/>
     <content location="simulation.xml" 
-		         format="http://identifiers.org/combine.specifications/sedml"/>
+		         format="http://identifiers.org/combine.specifications/sed-ml"/>
     <content location="article.pdf" 
 		         format="http://purl.org/NET/mediatypes/application/pdf"/>
     <content location="metadata.rdf" 
@@ -31,7 +31,7 @@ associated meta information for clerical data is included in
 </omexManifest>
 \end{example}
 
-Here a complete example, on how the clerical data could be encoded: 
+Here a complete example, on how the clerical data could be encoded in the metadata file: 
 
 \begin{example}
 <?xml version="1.0" encoding="UTF-8"?>
@@ -39,7 +39,7 @@ Here a complete example, on how the clerical data could be encoded:
          xmlns:dcterms="http://purl.org/dc/terms/" 
 				 xmlns:vCard="http://www.w3.org/2006/vcard/ns#">
 
-   <rdf:Description rdf:about="./simulation.xml">
+   <rdf:Description rdf:about="simulation.xml">
       <dcterms:description>SED-ML Description Representing a 1D Steady Scan 
 			   experiment carried out on the Heinrich Oscillator model. 
 			</dcterms:description>

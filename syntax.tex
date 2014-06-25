@@ -21,23 +21,22 @@ PKWARE website \cite{zipSpec}.
 \subsection{COMBINE archive extensions}
 \label{combine-archive-extensions}
 The extension for the COMBINE archive is \token{.omex}, for "{O}pen 
-{M}odeling {EX}change format". If a COMBINE archive with that extension 
-is encountered, an application should present the user with the 
-\textit{active document} (see also \ref{active_document}). 
+{M}odeling {EX}change format". 
 
 
-Additional extensions are being used, so that applications can quickly 
-open a specific file from the COMBINE archive. This provides users with 
-a consistent behavior in that each time such a file is opened, the 
-corresponding same main file opens. The extensions in use are: 
+Additional extensions indicate which standard formats are used within 
+the archive, and help users to select appropriate software tools and 
+in particular parsers. 
+The extensions in use are: 
 
 
 \begin{itemize}
-	\item {\token{.sedx} - SED-ML archive}
-	\item {\token{.sbex} - SBML archive}
-	\item {\token{.cmex} - CellML archive}
-	\item {\token{.neux} - NeuroML archive}
-	\item {\token{.phex} - PharmML archive}
+	\item {\token{.sedx} - SED-ML archive} \cite{sedmll1v1}
+	\item {\token{.sbex} - SBML archive} \cite{sbml}
+	\item {\token{.cmex} - CellML archive} \cite{cellml11}
+	\item {\token{.neux} - NeuroML archive} \cite{Gleeson2010}
+	\item {\token{.phex} - PharmML archive} \cite{pharmml}
+        \item {\token{.sbox} - SBOL archive} \cite{sbol}
 \end{itemize}
 
 
@@ -75,16 +74,16 @@ The archive contains:
 The COMBINE archive defines two namespace URIs that allows to uniquely 
 identify the manifest file and the whole archive.
 
+The namespace URI for this version of OMEX is the following: 
+
+\begin{center}
+\uri{http://identifiers.org/combine.specifications/omex}
+\end{center}
+
 The namespace URI for this version of the COMBINE archive manifest is the following: 
 
 \begin{center}
 \uri{http://identifiers.org/combine.specifications/omex-manifest}
-\end{center}
-
-The namespace URI for this version of the COMBINE archive is the following: 
-
-\begin{center}
-\uri{http://identifiers.org/combine.specifications/omex}
 \end{center}
 
 
@@ -93,8 +92,7 @@ The namespace URI for this version of the COMBINE archive is the following:
 \label{primtypes}
 
 The COMBINE archive uses the XML Schema 1.0 data types~\citep{biron:2000}.
-More specifically we make use of \primtype{integer}, \primtype{double},
-and \primtype{string}.
+More specifically we make use of \primtype{string}.
 
 
 \subsection{The \token{manifest.xml} file and the \class{OmexManifest} class}
@@ -134,9 +132,9 @@ The \token{format} attribute is a required attribute of type \token{string}. It
 indicates the file type of the \Content element. The allowed values of the 
 \token{format} attribute fall in two categories. Either the format 
 denotes one of the COMBINE standards, in which case the \token{format} 
-will begin with its \token{identifiers.org} URI. Or the 
-\token{format} will represent a MIME type, in which case the \token{format} 
-will begin with its \token{purl.org} URI. 
+must begin with its \token{identifiers.org} URI. Or the 
+\token{format} represents a Media type \cite{rfc2046}, in which case the \token{format} 
+indicates the file type.
 
 Using \token{identifiers.org} URI allows to unambiguously define the COMBINE standard, and even its level and version. For example, the identifier: \token{http://identifiers.org/combine.specifications/sbml} would denote the \Content 
 element as being encoded in the SBML format. That is usually sufficient, as tools supporting one level of SBML usually
@@ -152,18 +150,20 @@ or even declare its Version with
 \token{http://identifiers.org/combine.specifications/sbml.level-2.version-3}.
 \end{center}
 
-The MIME type \token{purl.org} URI would be of the form \token{http://purl.org/NET/mediatypes/}
+
+The Media type \token{purl.org} URI should be of the form \token{http://purl.org/NET/mediatypes/}
 followed by the MIME type. Here are a few examples :
 
 \begin{example}
-    http://purl.org/NET/mediatypes/image/png
-    http://purl.org/NET/mediatypes/application/pdf
-    http://purl.org/NET/mediatypes/application/sbml+xml
+    for png (Portable Network Graphics) http://purl.org/NET/mediatypes/image/png
+    for pdf (Portable Document Format) http://purl.org/NET/mediatypes/application/pdf
+    for sbml http://purl.org/NET/mediatypes/application/sbml+xml
 \end{example}
 
-If both an \token{identifiers.org} URI and a MIME type are available for one specific format, you should use the
-\token{identifiers.org} URI. 
+If both an \token{identifiers.org} URI and a MIME type are available for one specific format, the
+\token{identifiers.org} URI must be used. 
 
+%%TODO re-phrase
 For compatibility reason, when reading a manifest.xml, you should be able to read format
 attribute that contain only the MIME type, not in it's URI form. That is due to the fact that the draft specification
 was allowing to use directly the MIME type for some time and some COMBINE archive using this form could be encountered.
@@ -191,9 +191,9 @@ program should first present to their users.
         format="http://identifiers.org/combine.specifications/omex-manifest"/>
     <content location="model/model.xml" format="http://identifiers.org/combine.specifications/sbml"/>
     <content location="simulation.xml" master="true"
-        format="http://identifiers.org/combine.specifications/sedml"/>
-    <content location="./article.pdf" format="http://purl.org/NET/mediatypes/application/pdf"/>
-    <content location="./metadata.rdf"
+        format="http://identifiers.org/combine.specifications/sed-ml"/>
+    <content location="article.pdf" format="http://purl.org/NET/mediatypes/application/pdf"/>
+    <content location="metadata.rdf"
         format="http://identifiers.org/combine.specifications/omex-metadata"/>
     <content location="diagram.sbgn" format="http://identifiers.org/combine.specifications/sbgn"/>
 </omexManifest>
@@ -302,7 +302,7 @@ organisations:
 \end{itemize}
 
 Users of the COMBINE standards may already be familiar with this 
-approach, as it is also taken by the Systems Biology Markup Language. 
+approach, as it is also taken by SBML, SED-ML, SBGN-ML. 
 Note however that the format here slightly differs from the controlled 
 annotations of SBML. The differences have been made to address inconsistencies 
 in the SBML vCard specification and to follow W3C recommendations {\footnote[4]{\url{http://www.w3.org/TR/vcard-rdf/}}} . The changes 

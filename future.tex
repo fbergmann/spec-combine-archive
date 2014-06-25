@@ -16,9 +16,9 @@ retrieving information from online resources that may not always be
 available or may be more complex.
 
 \subsection{Cross References between entries}
-At HARMONY we spend some time discussing whether cross references 
+At HARMONY 2013, we spend some time discussing whether cross references 
 between the individual entries in the archive ought to be in this first 
-version of the specification. However, it was decided to leave the cross 
+version of the specification. It was decided to leave the cross 
 referencing to the individual standards for now, rather to impose them 
 ad-hoc. 
 
@@ -32,3 +32,33 @@ identifier to point to a different namespace rather than:
 \url{http://identifiers.org/combine.specifications/omex-metadata}
 
 However, as of the time of this writing no such format was proposed.
+
+\subsection{Convergence with other archive formats}
+Recently, the Workflow4Ever project (Wf4ever) funded by the European Union 
+developed the Research Object Bundle \cite{ro2013}, focusing on the preservation
+of scientific experiments in data-intensive science. The structure of the 
+Research Object Bundle is close to the COMBINE archive. Based on Adobe 
+Universal Container Format \cite{ucf}, it is also a Zip file containing 
+a manifest and metadata. Discussions have started with the latter project. 
+One way of starting convergence would be to share metadata vocabularies and format. 
+
+
+Further from scientific research, several industry standards are being largely 
+used for building document archives based on Zip files. The main ones belong to 
+two large families. The aforementioned Universal Container Format bears strong 
+similarities with the Open Document Format \cite{ODF} developed by the Organization 
+for the Advancement of Structured Information Standards (OASIS), and the EPUB 
+Open Container Format  \cite{OCF} developed by the International Digital Publication 
+Forum (IDPF). As for the format described here, those archives contain a manifest 
+file that lists and identifies the contents of the archive and a metadata file, 
+either in xml or rdf. In parallel, Microsoft developed the Open Packaging Convention  \cite{OPC} 
+used in its office suite and some other software such as MathWorks' Simulink. Those 
+packages also list their contents in an xml file, and can carry metadata. 
+
+
+Those industry standards are relatively complex and rigid. In this initial iteration 
+of the specification, the community opted for simplicity and flexibility, in order 
+to get traction. The main differences between the COMBINE archive and the formats 
+discussed above lie in the structure of the archive and the format of the file 
+describing the content. Since the COMBINE archive is in general less specified, 
+future convergences will be easy to implement once agreed upon.

@@ -1,34 +1,7 @@
 % -*- TeX-master: "main"; fill-column: 72 -*- 
 
-\section{ Introduction and motivation } \label{intro} 
 
-Computational modeling is an increasingly interdisciplinary field, 
-different aspects come together that need to be stored in a cohesive 
-unit. When exchanging a model, it increasingly becomes an issue that not 
-all relevant files are exchanged along with it. Many different 
-approaches have been taken to solve this issue, such as folder based 
-project structures, or special versions of version control systems. 
-Unfortunately these approaches are not as easy to support for tool 
-authors as a single file based solution would. 
-
-This specification describes the "COMBINE archive" format. A 
-\textit{COMBINE archive} is a single file containing the various 
-documents (and in the future, references to documents), necessary for 
-the description of a model and all associated data and procedures. This 
-includes for instance, but not limited to, simulation experiment 
-descriptions in SED-ML, all models needed to run the simulations in SBML 
-and their graphical representations in SBGN-ML. 
-
-The COMBINE archive aims to augment these efforts by standardizing a 
-meta file format (or manifest) that describes what files all belong to 
-computational models, as well as a description format and a convention 
-for bundling the information together. 
-
-Details of earlier independent proposals are provided in 
-\ref{background}. 
-
-
-\subsection{Document conventions} \label{conventions} 
+\section{Document conventions} \label{conventions} 
 
 Following the precedent set by other COMBINE specification
 documents, we use UML~1.0 (Unified Modeling Language; 
@@ -70,4 +43,33 @@ start with a capital letter.
 
 For other matters involving the use of UML and XML, we follow the 
 conventions used in other COMBINE specification documents. 
+
+\section{Background}  \label{background} 
+
+\subsection{ Motivation and Background}
+
+Computational modeling is an increasingly interdisciplinary field, 
+different aspects come together that need to be stored in a cohesive 
+unit. When exchanging a model, it increasingly becomes an issue that not 
+all relevant files are exchanged along with it. Many different 
+approaches have been taken to solve this issue, such as folder based 
+project structures, or special versions of version control systems. 
+Unfortunately these approaches are not as easy to support for tool 
+authors as a single file based solution would. 
+
+This specification describes the "COMBINE archive" format. A 
+\textit{COMBINE archive} is a single file containing the various 
+documents (and in the future, references to documents), necessary for 
+the description of a model and all associated data and procedures. This 
+includes for instance, but not limited to, simulation experiment 
+descriptions in SED-ML, all models needed to run the simulations in SBML 
+and their graphical representations in SBGN-ML. 
+
+The COMBINE archive aims to augment these efforts by standardizing a 
+meta file format (or manifest) that describes what files all belong to 
+computational models, as well as a description format and a convention 
+for bundling the information together. 
+
+Details of earlier independent proposals are provided in 
+\ref{background}. 
 

@@ -8,7 +8,7 @@ and associated data in a COMBINE archive. First the \OmexManifest, that
 includes five entries. One of these entries is the \OmexManifest itself, 
 it has a fixed location \token{location="manifest.xml"}. Additionally 
 the archive includes an SBML model, a SED-ML description. It also 
-includes a PDF file that is specified through its MIME type. Finally 
+includes a PDF file which format is specified through its Media type. Finally 
 associated meta information for clerical data is included in 
 \token{location="metadata.rdf"}. 
 
@@ -18,28 +18,26 @@ associated meta information for clerical data is included in
 <omexManifest xmlns="http://identifiers.org/combine.specifications/omex-manifest">
     <content location="." 
 		         format="http://identifiers.org/combine.specifications/omex"/>
-    <content location="manifest.xml" 
-		         format="http://identifiers.org/combine.specifications/omex-manifest"/>
     <content location="model/model.xml" 
 		         format="http://identifiers.org/combine.specifications/sbml"/>
-    <content location="simulation.xml" 
-		         format="http://identifiers.org/combine.specifications/sedml"/>
-    <content location="article.pdf" 
+    <content location="simulation.xml" master="true"
+		         format="http://identifiers.org/combine.specifications/sed-ml"/>
+    <content location="doc/article.pdf" 
 		         format="http://purl.org/NET/mediatypes/application/pdf"/>
     <content location="metadata.rdf" 
 		         format="http://identifiers.org/combine.specifications/omex-metadata"/>
 </omexManifest>
 \end{example}
 
-Here a complete example, on how the clerical data could be encoded: 
+Here a complete example, on how the clerical data could be encoded in the metadata file: 
 
 \begin{example}
 <?xml version="1.0" encoding="UTF-8"?>
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
          xmlns:dcterms="http://purl.org/dc/terms/" 
-				 xmlns:vCard="http://www.w3.org/2006/vcard/ns#">
-
-   <rdf:Description rdf:about="./simulation.xml">
+         xmlns:vCard="http://www.w3.org/2006/vcard/ns#"
+         xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+   <rdf:Description rdf:about="simulation.xml">
       <dcterms:description>SED-ML Description Representing a 1D Steady Scan 
 			   experiment carried out on the Heinrich Oscillator model. 
 			</dcterms:description>
@@ -63,6 +61,7 @@ Here a complete example, on how the clerical data could be encoded:
       <dcterms:modified rdf:parseType="Resource">
          <dcterms:W3CDTF>2014-01-20T19:54:05Z</dcterms:W3CDTF>
       </dcterms:modified>
+     <bqmodel:isDescribedBy rdf:resource="http://identifiers.org/biomodels.db/BIOMD0000000012" /> 
    </rdf:Description>
 </rdf:RDF>
 \end{example}

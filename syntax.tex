@@ -152,7 +152,7 @@ or even declare its Version with
 
 
 The Media type \token{purl.org} URI should be of the form \token{http://purl.org/NET/mediatypes/}
-followed by the MIME type. Here are a few examples :
+followed by the Media type name. Here are a few examples :
 
 \begin{example}
     for png (Portable Network Graphics) http://purl.org/NET/mediatypes/image/png
@@ -163,11 +163,9 @@ followed by the MIME type. Here are a few examples :
 If both an \token{identifiers.org} URI and a MIME type are available for one specific format, the
 \token{identifiers.org} URI must be used. 
 
-%%TODO re-phrase
-For compatibility reason, when reading a manifest.xml, you should be able to read format
-attribute that contain only the MIME type, not in it's URI form. That is due to the fact that the draft specification
-was allowing to use directly the MIME type for some time and some COMBINE archive using this form could be encountered.
-However, when creating a new COMBINE archive, the URI form should always be used for MIME type.
+When creating a new COMBINE archive, the URI form should always be used for Media types. However, you may encounter some
+old COMBINE archives that use directly the Media type name for the format attribute, not in the URI form.
+
 
 \paragraph{The \token{master} attribute}
 \label{active_document}
@@ -259,9 +257,7 @@ organisations:
      W3C, in particular its terms:
      \begin{itemize}
 		\item \token{RDF}, 
-		\item \token{Description}, 
-		\item \token{Bag}, 
-		\item \token{li}.
+		\item \token{Description}.
 	\end{itemize}
 	}
 	\item  {
@@ -327,14 +323,14 @@ in \token{location} of the \Content element.
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
          xmlns:dcterms="http://purl.org/dc/terms/" 
 				 xmlns:vCard="http://www.w3.org/2006/vcard/ns#">
-   <rdf:Description rdf:about="./simulation.xml">
+   <rdf:Description rdf:about="simulation.xml">
    ...
 	 </rdf:Description>
 </rdf:RDF>
 \end{example}
 
 The example above signifies that a content element with 
-\token{location="./simulation.xml"} is described. A complete example of 
+\token{location="simulation.xml"} is described. A complete example of 
 the metadata related to a simulation description contained in a COMBINE 
 archive is described in \ref{examples}. 
 

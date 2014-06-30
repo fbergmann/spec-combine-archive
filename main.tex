@@ -4,10 +4,14 @@
 \usepackage{hyperref}
 \frontNotice{\centering This is a working draft of the specification for the COMBINE archive and not a normative document. Please send feedback to the COMBINE mailing list at combine-archive@googlegroups.com.}
 
+\usepackage{natbib}
+
+\usepackage{url}
+
 \begin{document}
 
 \packageTitle{COMBINE Archive Specification}
-\packageVersion{Version 1, Draft } \packageVersionDate{\today}
+\packageVersion{Version 1, Release Candidate} \packageVersionDate{\today}
 \packageGeneralURL{http://co.mbine.org/documents/archive}
 \packageThisVersionURL{http://co.mbine.org/documents/archive}
 
@@ -31,7 +35,7 @@ Cambridge , UK & Pasadena, CA, US\\
 \maketitlepage
 \maketableofcontents
 
-\input{intro} % preamble and introduction
+\input{conventions} 
 \input{background}
 \input{syntax}
 \input{examples}

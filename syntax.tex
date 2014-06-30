@@ -278,24 +278,21 @@ in the SBML vCard specification and to follow W3C recommendations {\footnote[4]{
 	\item  "Orgname" becomes "organization-name" 
 \end{itemize}
 
-A \textit{COMBINE archive} can include multiple metadata elements adding information about different content. To 
-identify the file a metadata element refers too, the
-\token{rdf:about} attribute should use the same value also used 
-in the \token{location} attribute of the respective \Content element, e.g.
+A \textit{COMBINE archive} can include multiple metadata elements adding information about different content files. To 
+identify the file a metadata element refers too, the \token{rdf:about} attribute of the relevant metadata structure should use the same value as used in the \token{location} attribute of the respective \Content element, e.g.
 
 \begin{example}
 <?xml version="1.0" encoding="UTF-8"?>
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
          xmlns:dcterms="http://purl.org/dc/terms/" 
-				 xmlns:vCard="http://www.w3.org/2006/vcard/ns#">
+	 xmlns:vCard="http://www.w3.org/2006/vcard/ns#"
+	 xmlns:bqmodel="http://biomodels.net/models-qualifiers">
    <rdf:Description rdf:about="simulation.xml">
    ...
 	 </rdf:Description>
 </rdf:RDF>
 \end{example}
 
-A complete example of 
-the metadata related to a simulation description contained in a COMBINE 
-archive is described in \ref{examples}. 
+A complete example of the metadata related to a simulation description contained in a COMBINE archive is described in \ref{examples}. 
 
 

@@ -115,8 +115,7 @@ The \token{format} attribute of type \token{string is required}. It
 indicates the file type of the \Content element. The allowed values fall in two categories. Either the format 
 denotes one of the COMBINE standards, in which case the \token{format} 
 is the corresponding \token{Identifiers.org} URI. Or the 
-\token{format} represents an Internet Media type \citep{rfc2046}, in which case the \token{format} 
-indicates this media type.
+\token{format} represents an Internet Media type \citep{rfc2046} (previously known as "MIME type"), in which case the \token{format} indicates this media type.
 
 Using an \token{Identifiers.org} URI allows to unambiguously define a COMBINE format, including the precise version used. For example, the identifier: \token{http://identifiers.org/combine.specifications/sbml} would denote that the file declared by the \Content 
 element is encoded in the SBML format. That might be sufficient, as tools supporting one version of SBML often
@@ -142,7 +141,7 @@ followed by the Media type name. Here are a few examples:
     for sbml http://purl.org/NET/mediatypes/application/sbml+xml
 \end{example}
 
-If both an \token{Identifiers.org} URI and an internet MIME type are available for one given format, the
+If both an \token{Identifiers.org} URI and a Media Type are available for one given format, the
 \token{Identifiers.org} URI must be used. Therefore the latter example should not be used. 
 
 When creating a new COMBINE archive, the URI form should always be used for Media types. However, you may encounter some
@@ -218,8 +217,7 @@ organisations:
 \begin{itemize}
 	\item  {
 	
-     The \href{http://www.w3.org/RDF/ }{ Resource Description Format} of the 
-     W3C, in particular its terms:
+     The Resource Description Format \citep{RDF} of the W3C, in particular its terms:
      \begin{itemize}
 		\item \token{RDF}, 
 		\item \token{Description}.
@@ -227,40 +225,40 @@ organisations:
 	}
 	\item  {
 
-	FIXME (vCard Ontology) vCard 4 (\cite{rfc6350}), a file format standard for electronic business 
+	vCard Ontology \citep{vCardOnto}, the RDF form of a file format standard for electronic business 
     cards, in particular its terms:
     	\begin{itemize}
-		\item \token{hasName}, 
-		\item \token{family-name}, 
-		\item \token{given-name}, 
-		\item \token{hasEmail},
-		\item \token{organization-name}.
+		\item \token{hasName} (\url{http://www.w3.org/2006/vcard/ns#hasName}), 
+		\item \token{family-name}, (\url{http://www.w3.org/2006/vcard/ns#family-name}),
+		\item \token{given-name}, (\url{http://www.w3.org/2006/vcard/ns#given-name}),
+		\item \token{hasEmail}, (\url{http://www.w3.org/2006/vcard/ns#hasEmail}),
+		\item \token{organization-name} (\url{http://www.w3.org/2006/vcard/ns#organization-name}),
 	\end{itemize}
 
 	More information on how to use vCard in RDF can be found 
-    on the W3C website\footnote[1]{\url{http://www.w3.org/TR/vcard-rdf/ }}.
+    on the W3C website\footnote{\url{http://www.w3.org/TR/vcard-rdf/ }}.
 	
 	}
 	\item {
 	
-	Metadata terms\footnote[2]{\url{http://dublincore.org/documents/dcmi-terms/}} of 
+	Metadata terms\footnote{\url{http://dublincore.org/documents/dcmi-terms/}} of 
 	the Dublin Core Metadata Initiative, in particular the terms: 
 
 	\begin{itemize}
-		\item \token{description}, 
-		\item \token{creator}, 
-		\item \token{created}, 
-		\item \token{modified},
-		\item \token{W3CDTF}.
+		\item \token{description} (\url{http://purl.org/dc/terms/description}),
+		\item \token{creator} (\url{http://purl.org/dc/terms/creator}), 
+		\item \token{created} (\url{http://purl.org/dc/terms/created}), 
+		\item \token{modified} (\url{http://purl.org/dc/terms/modified}),
+		\item \token{W3CDTF} (\url{http://purl.org/dc/terms/W3CDTF}).
 	\end{itemize}
 		
 	More information on the use of Dublin Core in RDF can be found 
-	on the Dublin Core website{\footnote[3]{\url{http://dublincore.org/documents/dc-rdf/}}}. 
+	on the Dublin Core website{\footnote{\url{http://dublincore.org/documents/dc-rdf/}}}. 
 	
 	More information is available about the definition of the date format used within \token{dcterms:created} and 
-	\token{dcterms:modified} elements{\footnote[4]{\url{http://www.w3.org/TR/NOTE-datetime}}}.
+	\token{dcterms:modified} elements{\footnote{\url{http://www.w3.org/TR/NOTE-datetime}}}.
 	}
-\item {The BioModels qualifiers FIXME
+\item {The BioModels qualifiers\footnote{\url{http://co.mbine.org/standards/qualifiers}}
 }
 \end{itemize}
 
@@ -268,7 +266,7 @@ Users of the COMBINE standards may already be familiar with this
 approach, as it is also taken by SBML, SED-ML, SBGN-ML. 
 Note however that the format here slightly differs from the controlled 
 annotations of SBML. The differences have been made to address inconsistencies 
-in the SBML vCard specification and to follow W3C recommendations {\footnote[4]{\url{http://www.w3.org/TR/vcard-rdf/}}} . The changes are: FIXME (URL)
+in the SBML vCard specification and to follow W3C recommendations {\footnote[4]{\url{http://www.w3.org/TR/vcard-rdf/}}} . The changes are: 
 
 \begin{itemize}
 	\item  "n" becomes "hasName" 
@@ -276,6 +274,7 @@ in the SBML vCard specification and to follow W3C recommendations {\footnote[4]{
 	\item  "Given" becomes "given-name" 
 	\item  "EMAIL" becomes "hasEmail" 
 	\item  "Orgname" becomes "organization-name" 
+	\item "rdf:Bags" anf "rdf:li" are no longer mandatory if there is only one statement.
 \end{itemize}
 
 A \textit{COMBINE archive} can include multiple metadata elements adding information about different content files. To 

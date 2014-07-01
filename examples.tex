@@ -33,35 +33,32 @@ Here a complete example, on how the clerical data could be encoded in the metada
 
 \begin{example}
 <?xml version="1.0" encoding="UTF-8"?>
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
-         xmlns:dcterms="http://purl.org/dc/terms/" 
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:dcterms="http://purl.org/dc/terms/"
          xmlns:vCard="http://www.w3.org/2006/vcard/ns#"
          xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-   <rdf:Description rdf:about="simulation.xml">
-      <dcterms:description>SED-ML Description Representing a 1D Steady Scan 
-			   experiment carried out on the Heinrich Oscillator model. 
-			</dcterms:description>
-      <dcterms:creator>
-         <rdf:Bag>
-            <rdf:li rdf:parseType="Resource">
-               <vCard:hasName rdf:parseType="Resource">
-                  <vCard:family-name>Bergmann</vCard:family-name>
-                  <vCard:given-name>Frank</vCard:given-name>
-               </vCard:hasName>
-               <vCard:hasEmail rdf:resource="fbergman@caltech.edu">
-               <vCard:organization-name>
-		      California Institute of Technology
-	       </vCard:organization-name>
-            </rdf:li>
-         </rdf:Bag>
-      </dcterms:creator>
-      <dcterms:created rdf:parseType="Resource">
-         <dcterms:W3CDTF>2014-01-20T19:52:11Z</dcterms:W3CDTF>
-      </dcterms:created>
-      <dcterms:modified rdf:parseType="Resource">
-         <dcterms:W3CDTF>2014-01-20T19:54:05Z</dcterms:W3CDTF>
-      </dcterms:modified>
-     <bqmodel:isDescribedBy rdf:resource="http://identifiers.org/biomodels.db/BIOMD0000000012" /> 
-   </rdf:Description>
+    <rdf:Description rdf:about=".">
+        <dcterms:description>
+            Expanded version of the human metabolic reconstruction Recon 2.1
+        </dcterms:description>
+        <dcterms:creator rdf:parseType="Resource">
+            <vCard:hasName rdf:parseType="Resource">
+                <vCard:family-name>Le Novere</vCard:family-name>
+                <vCard:given-name>Nicolas</vCard:given-name>
+            </vCard:hasName>
+            <vCard:hasEmail rdf:resource="lenov@babraham.ac.uk" />
+            <vCard:organization-name>
+                Babraham Institute
+            </vCard:organization-name>
+            <vCard:hasURL rdf:resource="http://orcid.org/0000-0002-6309-7327"/>
+        </dcterms:creator>
+        <dcterms:created rdf:parseType="Resource">
+            <dcterms:W3CDTF>2014-06-26T10:29:00Z</dcterms:W3CDTF>
+        </dcterms:created>
+        <bqmodel:is      
+             rdf:resource="http://identifiers.org/biomodels.db/MODEL1311110001" />
+        <bqmodel:isDescribedBy       
+             rdf:resource="http://identifiers.org/arxiv/1311.5696" />
+    </rdf:Description>
 </rdf:RDF>
 \end{example}

@@ -4,16 +4,20 @@
 \usepackage{hyperref}
 \frontNotice{\centering This is a working draft of the specification for the COMBINE archive and not a normative document. Please send feedback to the COMBINE mailing list at combine-archive@googlegroups.com.}
 
+\usepackage{natbib}
+
+\usepackage{url}
+
 \begin{document}
 
 \packageTitle{COMBINE Archive Specification}
-\packageVersion{Version 1, Draft } \packageVersionDate{\today}
+\packageVersion{Version 1, Release Candidate} \packageVersionDate{\today}
 \packageGeneralURL{http://co.mbine.org/documents/archive}
 \packageThisVersionURL{http://co.mbine.org/documents/archive}
 
 \author{%
 \begin{tabular}{c>{\hspace{20pt}}c}
-Nicolas Le Nov\`{e}re & Frank T. Bergmann\\[0.25em]
+Nicolas Le Nov\`{e}re & Frank T. Bergmann \\[0.25em]
 \mailto{n.lenovere@gmail.com} & \mailto{fbergmann@caltech.edu}\\[0.25em]
 Babraham Institute & Computing and Mathematical Sciences\\
 Babraham Campus Cambridge & California Institute of Technology\\
@@ -25,13 +29,12 @@ Cambridge , UK & Pasadena, CA, US\\
 
 \newcommand{\OmexManifest}{\defRef{OmexManifest}{manifest-class}\xspace}
 \newcommand{\Content}{\defRef{Content}{content-class}\xspace}
-
 \newcommand{\sbmlthreecore}{SBML Level~3 Version~1 Core\xspace}
 
 \maketitlepage
 \maketableofcontents
 
-\input{intro} % preamble and introduction
+\input{conventions} 
 \input{background}
 \input{syntax}
 \input{examples}

@@ -177,7 +177,7 @@ does support SED-ML as well as SBML, it should load the SED-ML file as the creat
 it to be the '\token{master}' file. If the software does not support SED-ML, it can still open the SBML document, ignoring
 the master attribute.
 
-Alternatively, if a software does not support either SBML or SED-ML it can choose to disregard the \token{master} attribute and the archive extension to present to the user the files present in the archive that it supports such as a PDF document of a  diagram describing the model, 
+Alternatively, if a software does not support either SBML or SED-ML it can choose to disregard the \token{master} attribute and the archive extension to present to the user the files present in the archive that it supports such as a PDF document or a diagram describing the model, 
 
 In some cases, the \token{master} attribute is more precise than the information given by the archive file
 extension.
@@ -200,7 +200,7 @@ extension.
 In this case, the archive contains a modular CellML model. The file extension \token{cmex} is not sufficient to know which file should be processed first since there are several CellML files. The \token{master} attribute allows the software
 to know it should process \token{main-model.xml} first.
 
-Ideally, COMBINE archives should contain only one model and should have only one \token{master} attribute set to \token{true}. However, in some cases, the creator of the archive might want to set several \token{master} attribute to \token{true}, for instance to indicate alternative renditions of a model in different formats, or to bundle together several models described in the same publication. In that case the reading software are free to open a specific file, all the files tagges as master, or display a dialog box to the user offering a choice. This might create some confusion as opening the same archive several times in the same software might result in a different model loaded. One option would be to not set any \token{master} attribute to \token{true}, being aware that proper interpretation of the archive migh be difficult, in particular for modular models.  
+Ideally, COMBINE archives should contain only one model and should have only one \token{master} attribute set to \token{true}. However, in some cases, the creator of the archive might want to set several \token{master} attribute to \token{true}, for instance to indicate alternative renditions of a model in different formats, or to bundle together several models described in the same publication. In that case the reading software are free to open a specific file, all the files tagged as master, or display a dialog box to the user offering a choice. This might create some confusion as opening the same archive several times in the same software might result in a different model loaded. One option would be to not set any \token{master} attribute to \token{true}, being aware that proper interpretation of the archive migh be difficult, in particular for modular models.  
 
 
 \subsection{Advised format for the archive metadata}
@@ -255,8 +255,8 @@ organisations:
 	More information on the use of Dublin Core in RDF can be found 
 	on the Dublin Core website{\footnote{\url{http://dublincore.org/documents/dc-rdf/}}}. 
 	
-	More information is available about the definition of the date format used within \token{dcterms:created} and 
-	\token{dcterms:modified} elements{\footnote{\url{http://www.w3.org/TR/NOTE-datetime}}}.
+	More informationabout the definition of the date format used within \token{dcterms:created} and 
+	\token{dcterms:modified} elements is available on the W3C website {\footnote{\url{http://www.w3.org/TR/NOTE-datetime}}}.
 	}
 \item {The BioModels qualifiers\footnote{\url{http://co.mbine.org/standards/qualifiers}}
 }

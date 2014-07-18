@@ -86,7 +86,7 @@ More specifically we make use of \primtype{string} and \primtype{boolean}.
 \subsection{The \token{manifest.xml} file and the \class{OmexManifest} class}
 \label{manifest-class}
 
-One file must be present at the root of any COMBINE archive, names \token{manifest.xml}. This file contains an instantiation of the \OmexManifest class. 
+One file must be present at the root of any COMBINE archive, named \token{manifest.xml}. This file contains an instantiation of the \OmexManifest class. 
 
 It contains a number of \Content children, one of which represents the COMBINE archive itself. 
 
@@ -103,7 +103,7 @@ contain as many entries as needed. All the files present in the archive but one 
 
 \subsection{The \class{Content} class}
 \label{content-class}
-An entry in the \OmexManifest is represented by the \Content class. It declares a file in the \emph{COMBINE archive}. A content element possesses two required attributes, \token{location} and \token{format}, as well as an optional one, \token{master} 
+An entry in the \OmexManifest is represented by the \Content class. It declares a file in the \emph{COMBINE archive}. A content element possesses two required attributes, \token{location} and \token{format}, as well as an optional one, \token{master}. 
 
 \paragraph{The \token{location} attribute}
 The \token{location} attribute of type 
@@ -111,7 +111,7 @@ The \token{location} attribute of type
 archive. The archive is represented by a dot \token{'.'}. 
 
 \paragraph{The \token{format} attribute}
-The \token{format} attribute of type \token{string is required}. It 
+The \token{format} attribute of type \token{string} is required. It 
 indicates the file type of the \Content element. The allowed values fall in two categories. Either the format 
 denotes one of the COMBINE standards, in which case the \token{format} 
 is the corresponding \token{Identifiers.org} URI. Or the 
@@ -236,7 +236,7 @@ organisations:
 	\end{itemize}
 
 	More information on how to use vCard in RDF can be found 
-    on the W3C website\footnote{\url{http://www.w3.org/TR/vcard-rdf/ }}.
+    on the W3C website\footnote{\url{http://www.w3.org/TR/vcard-rdf/}}.
 	
 	}
 	\item {
@@ -266,7 +266,7 @@ Users of the COMBINE standards may already be familiar with this
 approach, as it is also taken by SBML, SED-ML, SBGN-ML. 
 Note however that the format here slightly differs from the controlled 
 annotations of SBML. The differences have been made to address inconsistencies 
-in the SBML vCard specification and to follow W3C recommendations {\footnote[4]{\url{http://www.w3.org/TR/vcard-rdf/}}} . The changes are: 
+in the SBML vCard specification and to follow W3C recommendations {\footnote{\url{http://www.w3.org/TR/vcard-rdf/}}} . The changes are: 
 
 \begin{itemize}
 	\item  "n" becomes "hasName" 
@@ -277,7 +277,7 @@ in the SBML vCard specification and to follow W3C recommendations {\footnote[4]{
 \end{itemize}
 
 A \textit{COMBINE archive} can include multiple metadata elements adding information about different content files. To 
-identify the file a metadata element refers too, the \token{rdf:about} attribute of the relevant metadata structure should use the same value as used in the \token{location} attribute of the respective \Content element, e.g.
+identify the file a metadata element refers to, the \token{rdf:about} attribute of the relevant metadata structure should use the same value as used in the \token{location} attribute of the respective \Content element, e.g.
 
 \begin{example}
 <?xml version="1.0" encoding="UTF-8"?>

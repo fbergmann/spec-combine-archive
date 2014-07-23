@@ -96,7 +96,7 @@ contain as many entries as needed. All the files present in the archive but one 
 \begin{figure}[h!]
   \centering
   % Requires \usepackage{graphicx}
-  \includegraphics[width=6cm]{images/OmexManifest.pdf}\\
+  \includegraphics[width=12cm]{images/OmexManifest.pdf}\\
   \caption{A UML representation of the Manifest. Each manifest contains a number of Content elements.}
   \label{fig:combine_uml}
 \end{figure}
@@ -115,7 +115,7 @@ The \token{format} attribute of type \token{string} is required. It
 indicates the file type of the \Content element. The allowed values fall in two categories. Either the format 
 denotes one of the COMBINE standards, in which case the \token{format} 
 is the corresponding \token{Identifiers.org} URI. Or the 
-\token{format} represents a Media type \citep{rfc2046} (previously known as "Internet Media type" or "MIME type"), in which case the \token{format} indicates this Media type.
+\token{format} represents an Internet Media type \citep{rfc2046} (previously known as "MIME type"), in which case the \token{format} indicates this Media type.
 
 Using an \token{Identifiers.org} URI allows to unambiguously define a COMBINE format, including the precise version used. For example, the identifier: \token{http://identifiers.org/combine.specifications/sbml} would denote that the file declared by the \Content 
 element is encoded in the SBML format. That might be sufficient, as tools supporting one version of SBML often

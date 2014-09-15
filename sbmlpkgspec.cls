@@ -419,7 +419,7 @@ Package Specification Style]
   \relax
   \else
   \vspace*{-1em}
-  {\large COMBINE Archive Specification}\\[2em]
+  %NR: removed to avoid having twice the same title {\large COMBINE Archive Specification}\\[2em]
   \fi
   \scalebox{1}[0.9]{%
     \fcolorbox{black}{mediumgray}{%

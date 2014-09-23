@@ -27,7 +27,7 @@ Additional extensions are available to indicate what is the main standard format
         \item {\token{.sbox} - SBOL archive} \citep{Galdzicki:2014}
 \end{itemize}
 
-Note that a COMBINE archive may contain files in several different standard formats. Therefore the specific extension is only an indication. For instance, a database of models could distribute archives of the same models, encoded encoded in SBML with the extension \token{.sbex} and encoded in CellML with the extension \token{.cmex}. However, archives containing models in both formats could also be distributed and the extension \token{.omex} used. If the archives contain SED-ML files, the extension \token{.sedx} could be used and the selection between the model formats be devolved to the SED-ML file. 
+Note that a COMBINE archive may contain files in several different standard formats. Therefore the specific extension is only an indication. For instance, a database of models could distribute archives of the same models, encoded in SBML with the extension \token{.sbex} and encoded in CellML with the extension \token{.cmex}. However, archives containing models in both formats could also be distributed and the extension \token{.omex} used. If the archives contain SED-ML files, the extension \token{.sedx} could be used and the selection between the model formats be devolved to the SED-ML file. 
 
 \subsection{Content of the archive}
 
@@ -53,7 +53,7 @@ The archive contains:
      various files contained in the archive, and the archive itself. A best practice is to include only one file for each file format metadata called \token{metadata.*} (where \token{*} means the 
      suitable file extension)
 	}
-	\item {all the remaining files necessary to the model and simulation project. }
+	\item {all remaining files necessary to the model and simulation project. }
 
 \end{enumerate}
 
@@ -200,7 +200,7 @@ extension.
 In this case, the archive contains a modular CellML model. The file extension \token{cmex} is not sufficient to know which file should be processed first since there are several CellML files. The \token{master} attribute allows the software
 to know it should process \token{main-model.xml} first.
 
-Ideally, COMBINE archives should contain only one model and should have only one \token{master} attribute set to \token{true}. However, in some cases, the creator of the archive might want to set several \token{master} attribute to \token{true}, for instance to indicate alternative renditions of a model in different formats, or to bundle together several models described in the same publication. In that case the reading software are free to open a specific file, all the files tagged as master, or display a dialog box to the user offering a choice. This might create some confusion as opening the same archive several times in the same software might result in a different model loaded. One option would be to not set any \token{master} attribute to \token{true}, being aware that proper interpretation of the archive migh be difficult, in particular for modular models.  
+Ideally, COMBINE archives should contain only one model and should have only one \token{master} attribute set to \token{true}. However, in some cases, the creator of the archive might want to set several \token{master} attribute to \token{true}, for instance to indicate alternative renditions of a model in different formats, or to bundle together several models described in the same publication. In that case the reading software are free to open a specific file, all the files tagged as master, or display a dialog box to the user offering a choice. This might create some confusion as opening the same archive several times in the same software might result in a different model loaded. One option would be to not set any \token{master} attribute to \token{true}, being aware that proper interpretation of the archive might be difficult, in particular for modular models.  
 
 
 \subsection{Advised format for the archive metadata}
@@ -212,7 +212,7 @@ recommended format is provided as part of the specification of the
 archive. 
 
 The recommended format is based on several standards developed by other 
-organisations: 
+organizations: 
 
 \begin{itemize}
 	\item  {

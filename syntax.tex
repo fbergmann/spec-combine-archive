@@ -4,13 +4,13 @@
 \label{syntax}
 
 In this section, we define the syntax and semantics of the COMBINE 
-Archive. We expound on the various data types and constructs defined, 
+archive. We expound on the various data types and constructs defined, 
 then in \sect{examples}, we provide complete examples of archives. 
 
 \subsection{The archive format}
 
 The COMBINE archive is encoded using the "{O}pen 
-{M}odeling {EX}change format" (OMEX). The archive itself is a "zip" file \cite{zipFile}. Zip is a file format used for data compression and archiving. A zip file contains one or more files that have been compressed, to reduce file size, or stored as is. The technical specification of the ZIP format is available from the PKWARE website \cite{zipSpec}.
+{M}odeling {EX}change format" (OMEX). The archive itself is a "zip" file \citep{zipFile}. Zip is a file format used for data compression and archiving. A zip file contains one or more files that have been compressed, to reduce file size, or stored as is. The technical specification of the ZIP format is available from the PKWARE website \citep{zipSpec}.
 
 \subsection{COMBINE archive extensions}
 \label{combine-archive-extensions}
@@ -27,7 +27,7 @@ Additional extensions are available to indicate what is the main standard format
         \item {\token{.sbox} - SBOL archive} \citep{Galdzicki:2014}
 \end{itemize}
 
-Note that a COMBINE archive may contain files in several different standard formats. Therefore the specific extension is only an indication. For instance, a database of models could distribute archives of the same models, encoded encoded in SBML with the extension \token{.sbex} and encoded in CellML with the extension \token{.cmex}. However, archives containing models in both formats could also be distributed and the extension \token{.omex} used. If the archives contain SED-ML files, the extension \token{.sedx} could be used and the selection between the model formats be devolved to the SED-ML file. 
+Note that a COMBINE archive may contain files in several different standard formats. Therefore the specific extension is only an indication. For instance, a database of models could distribute archives of the same models, encoded in SBML with the extension \token{.sbex} and encoded in CellML with the extension \token{.cmex}. However, archives containing models in both formats could also be distributed and the extension \token{.omex} used. If the archives contain SED-ML files, the extension \token{.sedx} could be used and the selection between the model formats be devolved to the SED-ML file. 
 
 \subsection{Content of the archive}
 
@@ -53,7 +53,7 @@ The archive contains:
      various files contained in the archive, and the archive itself. A best practice is to include only one file for each file format metadata called \token{metadata.*} (where \token{*} means the 
      suitable file extension)
 	}
-	\item {all the remaining files necessary to the model and simulation project. }
+	\item {all remaining files necessary to the model and simulation project. }
 
 \end{enumerate}
 
@@ -86,7 +86,7 @@ More specifically we make use of \primtype{string} and \primtype{boolean}.
 \subsection{The \token{manifest.xml} file and the \class{OmexManifest} class}
 \label{manifest-class}
 
-One file must be present at the root of any COMBINE archive, names \token{manifest.xml}. This file contains an instantiation of the \OmexManifest class. 
+One file must be present at the root of any COMBINE archive, named \token{manifest.xml}. This file contains an instantiation of the \OmexManifest class. 
 
 It contains a number of \Content children, one of which represents the COMBINE archive itself. 
 
@@ -96,14 +96,14 @@ contain as many entries as needed. All the files present in the archive but one 
 \begin{figure}[h!]
   \centering
   % Requires \usepackage{graphicx}
-  \includegraphics[width=6cm]{images/OmexManifest.pdf}\\
+  \includegraphics[width=12cm]{images/OmexManifest.pdf}\\
   \caption{A UML representation of the Manifest. Each manifest contains a number of Content elements.}
   \label{fig:combine_uml}
 \end{figure}
 
 \subsection{The \class{Content} class}
 \label{content-class}
-An entry in the \OmexManifest is represented by the \Content class. It declares a file in the \emph{COMBINE archive}. A content element possesses two required attributes, \token{location} and \token{format}, as well as an optional one, \token{master} 
+An entry in the \OmexManifest is represented by the \Content class. It declares a file in the \emph{COMBINE archive}. A content element possesses two required attributes, \token{location} and \token{format}, as well as an optional one, \token{master}. 
 
 \paragraph{The \token{location} attribute}
 The \token{location} attribute of type 
@@ -111,11 +111,11 @@ The \token{location} attribute of type
 archive. The archive is represented by a dot \token{'.'}. 
 
 \paragraph{The \token{format} attribute}
-The \token{format} attribute of type \token{string is required}. It 
+The \token{format} attribute of type \token{string} is required. It 
 indicates the file type of the \Content element. The allowed values fall in two categories. Either the format 
 denotes one of the COMBINE standards, in which case the \token{format} 
 is the corresponding \token{Identifiers.org} URI. Or the 
-\token{format} represents an Internet Media type \citep{rfc2046} (previously known as "MIME type"), in which case the \token{format} indicates this media type.
+\token{format} represents an Internet Media type \citep{rfc2046} (previously known as "MIME type"), in which case the \token{format} indicates this Media type.
 
 Using an \token{Identifiers.org} URI allows to unambiguously define a COMBINE format, including the precise version used. For example, the identifier: \token{http://identifiers.org/combine.specifications/sbml} would denote that the file declared by the \Content 
 element is encoded in the SBML format. That might be sufficient, as tools supporting one version of SBML often
@@ -142,7 +142,7 @@ followed by the Media type name. Here are a few examples:
 \end{example}
 
 If both an \token{Identifiers.org} URI and a Media Type are available for one given format, the
-\token{Identifiers.org} URI must be used. Therefore the latter example should not be used. 
+\token{Identifiers.org} URI must be used. Therefore the latter example should not be used. However, new Identifiers.org URI could be created for a format where an existing Media type was in used.
 
 When creating a new COMBINE archive, the URI form should always be used for Media types. However, you may encounter some
 old COMBINE archives that use directly the Media type name for the format attribute, not in the URI form.
@@ -177,7 +177,7 @@ does support SED-ML as well as SBML, it should load the SED-ML file as the creat
 it to be the '\token{master}' file. If the software does not support SED-ML, it can still open the SBML document, ignoring
 the master attribute.
 
-Alternatively, if a software does not support either SBML or SED-ML it can choose to disregard the \token{master} attribute and the archive extension to present to the user the files present in the archive that it supports such as a PDF document of a  diagram describing the model, 
+Alternatively, if a software does not support either SBML or SED-ML it can choose to disregard the \token{master} attribute and the archive extension to present to the user the files present in the archive that it supports such as a PDF document or a diagram describing the model, 
 
 In some cases, the \token{master} attribute is more precise than the information given by the archive file
 extension.
@@ -200,7 +200,7 @@ extension.
 In this case, the archive contains a modular CellML model. The file extension \token{cmex} is not sufficient to know which file should be processed first since there are several CellML files. The \token{master} attribute allows the software
 to know it should process \token{main-model.xml} first.
 
-Ideally, COMBINE archives should contain only one model and should have only one \token{master} attribute set to \token{true}. However, in some cases, the creator of the archive might want to set several \token{master} attribute to \token{true}, for instance to indicate alternative renditions of a model in different formats, or to bundle together several models described in the same publication. In that case the reading software are free to open a specific file, all the files tagges as master, or display a dialog box to the user offering a choice. This might create some confusion as opening the same archive several times in the same software might result in a different model loaded. One option would be to not set any \token{master} attribute to \token{true}, being aware that proper interpretation of the archive migh be difficult, in particular for modular models.  
+Ideally, COMBINE archives should contain only one model and should have only one \token{master} attribute set to \token{true}. However, in some cases, the creator of the archive might want to set several \token{master} attribute to \token{true}, for instance to indicate alternative renditions of a model in different formats, or to bundle together several models described in the same publication. In that case the reading software are free to open a specific file, all the files tagged as master, or display a dialog box to the user offering a choice. This might create some confusion as opening the same archive several times in the same software might result in a different model loaded. One option would be to not set any \token{master} attribute to \token{true}, being aware that proper interpretation of the archive might be difficult, in particular for modular models.  
 
 
 \subsection{Advised format for the archive metadata}
@@ -212,7 +212,7 @@ recommended format is provided as part of the specification of the
 archive. 
 
 The recommended format is based on several standards developed by other 
-organisations: 
+organizations: 
 
 \begin{itemize}
 	\item  {
@@ -236,7 +236,7 @@ organisations:
 	\end{itemize}
 
 	More information on how to use vCard in RDF can be found 
-    on the W3C website\footnote{\url{http://www.w3.org/TR/vcard-rdf/ }}.
+    on the W3C website\footnote{\url{http://www.w3.org/TR/vcard-rdf/}}.
 	
 	}
 	\item {
@@ -255,29 +255,19 @@ organisations:
 	More information on the use of Dublin Core in RDF can be found 
 	on the Dublin Core website{\footnote{\url{http://dublincore.org/documents/dc-rdf/}}}. 
 	
-	More information is available about the definition of the date format used within \token{dcterms:created} and 
-	\token{dcterms:modified} elements{\footnote{\url{http://www.w3.org/TR/NOTE-datetime}}}.
+	More informationabout the definition of the date format used within \token{dcterms:created} and 
+	\token{dcterms:modified} elements is available on the W3C website {\footnote{\url{http://www.w3.org/TR/NOTE-datetime}}}.
 	}
 \item {The BioModels qualifiers\footnote{\url{http://co.mbine.org/standards/qualifiers}}
 }
 \end{itemize}
 
 Users of the COMBINE standards may already be familiar with this 
-approach, as it is also taken by SBML, SED-ML, SBGN-ML. 
-Note however that the format here slightly differs from the controlled 
-annotations of SBML. The differences have been made to address inconsistencies 
-in the SBML vCard specification and to follow W3C recommendations {\footnote[4]{\url{http://www.w3.org/TR/vcard-rdf/}}} . The changes are: 
-
-\begin{itemize}
-	\item  "n" becomes "hasName" 
-	\item  "Family" becomes "family-name" 
-	\item  "Given" becomes "given-name" 
-	\item  "EMAIL" becomes "hasEmail" 
-	\item  "Orgname" becomes "organization-name" 
-\end{itemize}
+approach, as it is also taken by SBML, SED-ML, SBGN-ML \footnote{Note: These terms slightly differs
+from the terms used in SBML level 3 version 1 specification.}.
 
 A \textit{COMBINE archive} can include multiple metadata elements adding information about different content files. To 
-identify the file a metadata element refers too, the \token{rdf:about} attribute of the relevant metadata structure should use the same value as used in the \token{location} attribute of the respective \Content element, e.g.
+identify the file a metadata element refers to, the \token{rdf:about} attribute of the relevant metadata structure should use the same value as used in the \token{location} attribute of the respective \Content element, e.g.
 
 \begin{example}
 <?xml version="1.0" encoding="UTF-8"?>
